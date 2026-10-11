@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 230" width="760" height="230">
+  <!-- T1 -->
+  <g transform="translate(16 16)">
+    <rect width="170" height="200" rx="12" fill="#05080d"/>
+    <ellipse cx="85" cy="86" rx="62" ry="74" fill="#b9bec4"/>
+    <ellipse cx="85" cy="86" rx="57" ry="69" fill="#15191e"/>
+    <ellipse cx="85" cy="86" rx="52" ry="64" fill="#8e959d"/>
+    <path d="M81 62c-9 2-11 15-9 27 2 8 8 8 9 1 1-8-1-18 2-25z" fill="#262b31"/>
+    <path d="M89 62c9 2 11 15 9 27-2 8-8 8-9 1-1-8 1-18-2-25z" fill="#262b31"/>
+    <ellipse cx="113" cy="60" rx="16" ry="14" fill="#737a82"/>
+    <circle cx="113" cy="60" r="7" fill="#666d75" stroke="#7f868e" stroke-width="2.5"/>
+    <text x="85" y="186" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#e6edf5">T1</text>
+  </g>
+  <!-- T1 + контраст -->
+  <g transform="translate(202 16)">
+    <rect width="170" height="200" rx="12" fill="#05080d"/>
+    <ellipse cx="85" cy="86" rx="62" ry="74" fill="#b9bec4"/>
+    <ellipse cx="85" cy="86" rx="57" ry="69" fill="#15191e"/>
+    <ellipse cx="85" cy="86" rx="52" ry="64" fill="#8e959d"/>
+    <path d="M81 62c-9 2-11 15-9 27 2 8 8 8 9 1 1-8-1-18 2-25z" fill="#262b31"/>
+    <path d="M89 62c9 2 11 15 9 27-2 8-8 8-9 1-1-8 1-18-2-25z" fill="#262b31"/>
+    <ellipse cx="113" cy="60" rx="16" ry="14" fill="#737a82"/>
+    <circle cx="113" cy="60" r="7" fill="#5c636b" stroke="#ffffff" stroke-width="2.5"/>
+    <circle cx="113" cy="60" r="14" fill="none" stroke="#ff8a4c" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="85" y="186" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#ff8a4c">T1 + контраст</text>
+  </g>
+  <!-- T2 -->
+  <g transform="translate(388 16)">
+    <rect width="170" height="200" rx="12" fill="#05080d"/>
+    <ellipse cx="85" cy="86" rx="62" ry="74" fill="#9aa0a7"/>
+    <ellipse cx="85" cy="86" rx="57" ry="69" fill="#15191e"/>
+    <ellipse cx="85" cy="86" rx="52" ry="64" fill="#6f767e"/>
+    <path d="M81 62c-9 2-11 15-9 27 2 8 8 8 9 1 1-8-1-18 2-25z" fill="#eef1f4"/>
+    <path d="M89 62c9 2 11 15 9 27-2 8-8 8-9 1-1-8 1-18-2-25z" fill="#eef1f4"/>
+    <ellipse cx="113" cy="60" rx="16" ry="14" fill="#d3d8dd"/>
+    <circle cx="113" cy="60" r="7" fill="#b8bec5" stroke="#8c939a" stroke-width="2.5"/>
+    <text x="85" y="186" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#e6edf5">T2</text>
+  </g>
+  <!-- FLAIR -->
+  <g transform="translate(574 16)">
+    <rect width="170" height="200" rx="12" fill="#05080d"/>
+    <ellipse cx="85" cy="86" rx="62" ry="74" fill="#9aa0a7"/>
+    <ellipse cx="85" cy="86" rx="57" ry="69" fill="#15191e"/>
+    <ellipse cx="85" cy="86" rx="52" ry="64" fill="#7f868e"/>
+    <path d="M81 62c-9 2-11 15-9 27 2 8 8 8 9 1 1-8-1-18 2-25z" fill="#1f242a"/>
+    <path d="M89 62c9 2 11 15 9 27-2 8-8 8-9 1-1-8 1-18-2-25z" fill="#1f242a"/>
+    <ellipse cx="113" cy="60" rx="16" ry="14" fill="#e6e9ed"/>
+    <circle cx="113" cy="60" r="7" fill="#a7adb4" stroke="#959ca3" stroke-width="2.5"/>
+    <text x="85" y="186" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#e6edf5">FLAIR</text>
+  </g>
+</svg>
