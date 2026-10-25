@@ -141,7 +141,43 @@ function sequence(start = 0, step = 1) {
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 33], text: 'text'}) // true
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
-function deepEqual(firstObject, secondObject) {}
+function deepEqual(firstObject, secondObject) {
+    if (firstObject === secondObject) {
+        return true;
+    }
+    // NaN не равен даже сам себе
+    if (Number.isNaN(firstObject) && Number.isNaN(secondObject)) {
+        return true;
+    }
+    // дальше сравниваем только объекты и массивы, null отсекаем (typeof null === 'object')
+    if (
+        typeof firstObject !== 'object' ||
+        typeof secondObject !== 'object' ||
+        firstObject === null ||
+        secondObject === null
+    ) {
+        return false;
+    }
+    if (Array.isArray(firstObject) !== Array.isArray(secondObject)) {
+        return false;
+    }
+
+    const firstKeys = Object.keys(firstObject);
+    const secondKeys = Object.keys(secondObject);
+    if (firstKeys.length !== secondKeys.length) {
+        return false;
+    }
+
+    for (const key of firstKeys) {
+        if (!secondKeys.includes(key)) {
+            return false;
+        }
+        if (!deepEqual(firstObject[key], secondObject[key])) {
+            return false;
+        }
+    }
+    return true;
+}
 
 module.exports = {
     isInteger,
