@@ -46,19 +46,35 @@ function recSumTo(n) {
  * Напишите функцию, считающую факториал заданного числа
  * @param {*} n
  */
-function factorial(n) {}
+function factorial(n) {
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
 
 /**
  * Напишите функцию, которая определяет, является ли число двойкой, возведенной в степень
  * @param {*} n
  */
-function isBinary(n) {}
+function isBinary(n) {
+    // у степени двойки в двоичной записи одна единица: 1000 & 0111 = 0
+    return n > 0 && (n & (n - 1)) === 0;
+}
 
 /**
  * Напишите функцию, которая находит N-е число Фибоначчи
  * @param {*} n
  */
-function fibonacci(n) {}
+function fibonacci(n) {
+    let prev = 0;
+    let curr = 1;
+    for (let i = 0; i < n; i++) {
+        [prev, curr] = [curr, prev + curr];
+    }
+    return prev;
+}
 
 /** Напишите функцию, которая принимает начальное значение и функцию операции
  * и возвращает функцию - выполняющую эту операцию.
