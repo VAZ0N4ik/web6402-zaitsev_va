@@ -37,28 +37,33 @@
       </p>
     </section>
 
-    <!-- Шаги: номера рисует CSS (counter + ::before) -->
+    <!-- Страница свёрстана на Flexbox: шаги и словарик (style.css, раздел 7) -->
     <section class="container section">
       <ol class="steps">
         <li class="steps__item">
           <h3 class="steps__title">Загрузка</h3>
           <p class="steps__text">Снимки приходят из аппарата в формате <code>DICOM</code> — набор отдельных срезов. Их собирают в один трёхмерный объём <code>NIfTI</code>.</p>
+          <p class="steps__result">→ NIfTI-объём</p>
         </li>
         <li class="steps__item">
           <h3 class="steps__title">Предобработка</h3>
           <p class="steps__text">Последовательности совмещают между собой (регистрация), удаляют череп (<span lang="en">skull stripping</span>) и приводят яркость к единой шкале.</p>
+          <p class="steps__result">→ 4 совмещённых канала</p>
         </li>
         <li class="steps__item">
           <h3 class="steps__title">Сегментация</h3>
           <p class="steps__text">Трёхмерная нейросеть семейства <strong>U-Net</strong> проходит по объёму и для каждого вокселя решает: «очаг» или «фон».</p>
+          <p class="steps__result">→ маска очагов</p>
         </li>
         <li class="steps__item">
           <h3 class="steps__title">Постобработка</h3>
           <p class="steps__text">Слишком мелкие «пятнышки» отбрасываются как шум, а оставшиеся области разделяются на отдельные очаги.</p>
+          <p class="steps__result">→ список очагов</p>
         </li>
         <li class="steps__item">
           <h3 class="steps__title">Отчёт</h3>
           <p class="steps__text">Для каждого очага — координаты и объём. Врач просматривает отметки и принимает окончательное решение: <em>модель подсказывает, но не ставит диагноз</em>.</p>
+          <p class="steps__result">→ отчёт для врача</p>
         </li>
       </ol>
     </section>
@@ -66,18 +71,23 @@
     <!-- Словарик: на него ведёт якорь #glossary -->
     <section id="glossary" class="container section">
       <h2>Словарик</h2>
-      <dl class="defs">
-        <dt class="defs__term">Воксель</dt>
-        <dd class="defs__desc">«Трёхмерный пиксель» — минимальный кубик объёма, из которых состоит МРТ-снимок.</dd>
-
-        <dt class="defs__term">Сегментация</dt>
-        <dd class="defs__desc">Разметка изображения: каждому вокселю присваивается класс (здесь — «очаг» или «фон»).</dd>
-
-        <dt class="defs__term">U-Net</dt>
-        <dd class="defs__desc">Архитектура нейросети в форме буквы U: сначала сжимает изображение, выделяя признаки, затем восстанавливает его до исходного размера в виде маски.</dd>
-
-        <dt class="defs__term">Dice</dt>
-        <dd class="defs__desc">Метрика совпадения маски модели <var>A</var> и разметки врача <var>B</var>: <code>2·|A ∩ B| / (|A| + |B|)</code>. Единица — полное совпадение, ноль — никакого.</dd>
+      <dl class="glossary">
+        <div class="glossary__item">
+          <dt class="glossary__term">Воксель</dt>
+          <dd class="glossary__desc">«Трёхмерный пиксель» — минимальный кубик объёма, из которых состоит МРТ-снимок.</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">Сегментация</dt>
+          <dd class="glossary__desc">Разметка изображения: каждому вокселю присваивается класс (здесь — «очаг» или «фон»).</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">U-Net</dt>
+          <dd class="glossary__desc">Архитектура нейросети в форме буквы U: сначала сжимает изображение, выделяя признаки, затем восстанавливает его до исходного размера в виде маски.</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">Dice</dt>
+          <dd class="glossary__desc">Метрика совпадения маски модели <var>A</var> и разметки врача <var>B</var>: <code>2·|A ∩ B| / (|A| + |B|)</code>. Единица — полное совпадение, ноль — никакого.</dd>
+        </div>
       </dl>
     </section>
   </main>

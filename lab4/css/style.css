@@ -437,11 +437,13 @@ abbr[title] {
 }
 
 
-/* ---------- 7. Шаги и словарик ---------- */
+/* ---------- 7. «Как это работает»: раскладка на Flexbox ---------- */
 
-/* Номера шагов рисует CSS: счётчик + ::before */
+/* Шаги стоят в ряд. flex: 1 1 180px — каждый шаг шириной от 180px,
+   лишнее место делится поровну, а если места мало, шаги переносятся на новую строку */
 .steps {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin: 0;
   padding: 0;
@@ -449,24 +451,27 @@ abbr[title] {
   counter-reset: step;
 }
 
+/* Внутри шага тоже flex, только столбиком: номер, заголовок, текст, результат */
 .steps__item {
-  position: relative;
-  padding: 20px 20px 20px 84px;
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background-color: var(--surface);
   counter-increment: step;
 }
 
+/* Номер шага рисует CSS: счётчик + ::before */
 .steps__item::before {
   content: counter(step, decimal-leading-zero);
-  position: absolute;
-  top: 20px;
-  left: 20px;
   width: 44px;
   height: 44px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   font-family: var(--mono);
   font-weight: 700;
@@ -480,10 +485,51 @@ abbr[title] {
 }
 
 .steps__title {
-  margin-bottom: 0.3em;
+  margin: 0;
 }
 
 .steps__text {
+  margin: 0;
+}
+
+/* margin-top: auto прижимает результат к низу шага, поэтому у всех шагов он на одной линии */
+.steps__result {
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* Словарик: каждая пара «термин — определение» это строка из двух flex-элементов */
+.glossary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.glossary__item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.glossary__item:last-child {
+  border-bottom: none;
+}
+
+.glossary__term {
+  flex: 0 0 140px;           /* термин всегда 140px: не растёт и не сжимается */
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.glossary__desc {
+  flex: 1;                   /* определение забирает всё оставшееся место */
   margin: 0;
 }
 
@@ -681,7 +727,15 @@ abbr[title] {
     margin-bottom: 8px;
   }
 
-  .steps__item {
-    padding: 76px 20px 20px;
+  /* Шагам медиазапрос не нужен: при ширине меньше двух шагов flex-wrap сам ставит их в столбик */
+
+  /* В столбик: термин над определением. flex: none — иначе 140px стали бы высотой */
+  .glossary__item {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .glossary__term {
+    flex: none;
   }
 }
