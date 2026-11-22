@@ -1,7 +1,7 @@
 /* NeuroScan — стили сайта (ЛР №4). Классы названы по БЭМ: блок__элемент_модификатор */
 
 
-/* ---------- 1. Переменные ---------- */
+/* ---------- 1. Переменные: все цвета сайта задаются только здесь ---------- */
 
 :root {
   --bg: #f4f7fb;
@@ -15,6 +15,10 @@
   --lesion-soft: rgba(217, 72, 15, 0.14);
   --border: #d6dee8;
   --shadow: 0 6px 20px rgba(20, 32, 46, 0.08);
+  --scan-glow: #7fe3d9;                    /* линия сканера */
+  --scan-fade: rgba(127, 227, 217, 0);     /* тот же цвет, но полностью прозрачный */
+  --swatch-dark: #1d2228;                  /* образцы яркости ликвора в таблице */
+  --swatch-bright: #eef1f4;
   --radius: 14px;
   --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: Consolas, "Courier New", monospace;
@@ -191,7 +195,7 @@ abbr[title] {
 
 .button_ghost {
   color: var(--accent);
-  background-color: transparent;
+  background: none;
 }
 
 
@@ -264,7 +268,7 @@ abbr[title] {
 
 .hero {
   padding: 56px 0;
-  background: linear-gradient(135deg, var(--accent-soft), transparent 60%);
+  background: linear-gradient(135deg, var(--accent-soft), var(--bg) 60%);
   border-bottom: 1px solid var(--border);
 }
 
@@ -307,8 +311,8 @@ abbr[title] {
   right: 0;
   top: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #7fe3d9, transparent);
-  box-shadow: 0 0 12px #7fe3d9;
+  background: linear-gradient(90deg, var(--scan-fade), var(--scan-glow), var(--scan-fade));
+  box-shadow: 0 0 12px var(--scan-glow);
   animation: scan-line 4s ease-in-out infinite;
 }
 
@@ -588,11 +592,11 @@ abbr[title] {
 }
 
 .swatch_dark {
-  background-color: #1d2228;
+  background-color: var(--swatch-dark);
 }
 
 .swatch_bright {
-  background-color: #eef1f4;
+  background-color: var(--swatch-bright);
 }
 
 
