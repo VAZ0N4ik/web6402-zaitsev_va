@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Основные МРТ-последовательности и их роль в поиске метастазов">
+  <title>NeuroScan — МРТ-последовательности</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo-accent">Scan</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="mri.html" class="active" aria-current="page">МРТ</a></li>
+          <li><a href="pipeline.html">Как это работает</a></li>
+          <li><a href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// входные данные</p>
+      <h1>МРТ-последовательности</h1>
+      <p class="lead">
+        МРТ не делает «одну фотографию»: аппарат снимает одну и ту же область в разных режимах —
+        <dfn>последовательностях</dfn>. Каждая подчёркивает свои ткани, поэтому модель получает на вход сразу несколько.
+      </p>
+    </section>
+
+    <!-- ===== Картинка: один срез в четырёх режимах ===== -->
+    <div class="container section">
+      <figure class="wide-figure">
+        <img src="img/sequences.svg" alt="Один и тот же схематичный срез в режимах T1, T1 с контрастом, T2 и FLAIR" width="760" height="230">
+        <figcaption>Один и тот же срез в четырёх режимах (схема). Очаг ярко «светится» только на T1 с контрастом.</figcaption>
+      </figure>
+    </div>
+
+    <!-- ===== Таблица: 1-й столбец влево, 2-й по центру, 4-й вправо ===== -->
+    <section class="container section">
+      <h2>Сравнение режимов</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Основные последовательности и их роль в поиске метастазов</caption>
+          <thead>
+            <tr>
+              <th scope="col">Последовательность</th>
+              <th scope="col">Ликвор</th>
+              <th scope="col">Что видно лучше всего</th>
+              <th scope="col">Канал модели*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>T1</td>
+              <td><span class="swatch swatch-dark"></span> тёмный</td>
+              <td>Анатомия: границы серого и белого вещества</td>
+              <td>0</td>
+            </tr>
+            <tr class="key-row">
+              <td>T1 + контраст (T1-CE)</td>
+              <td><span class="swatch swatch-dark"></span> тёмный</td>
+              <td>Очаги, накопившие контраст, — <strong>главный признак метастаза</strong></td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>T2</td>
+              <td><span class="swatch swatch-bright"></span> яркий</td>
+              <td>Жидкость и отёк</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>FLAIR</td>
+              <td><span class="swatch swatch-dark"></span> подавлен</td>
+              <td>Отёк вокруг очага (перифокальный)</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">* Номер канала — порядок, в котором последовательности подаются на вход нейросети в этом проекте.</p>
+    </section>
+
+    <section class="container section">
+      <h2>Почему именно контраст</h2>
+      <p>
+        Перед съёмкой T1-CE пациенту вводят контрастное вещество на основе гадолиния.
+        В здоровом мозге его не пускает <abbr title="гематоэнцефалический барьер">ГЭБ</abbr>,
+        а в метастазе барьер нарушен — вещество накапливается, и очаг становится <em>ярким</em>.
+        Поэтому T1-CE — главный канал для модели, а остальные режимы помогают отличить очаг от сосуда или артефакта.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №2 по web-программированию</p>
+      <p><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

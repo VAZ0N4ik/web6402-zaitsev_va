@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Этапы автоматического анализа МРТ: от загрузки снимков до отчёта">
+  <title>NeuroScan — как работает анализ</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo-accent">Scan</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="mri.html">МРТ</a></li>
+          <li><a href="pipeline.html" class="active" aria-current="page">Как это работает</a></li>
+          <li><a href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// конвейер обработки</p>
+      <h1>Как работает анализ</h1>
+      <p class="lead">
+        Путь снимка от аппарата до врача — пять шагов. Незнакомые слова собраны
+        в <a href="#glossary">словарике</a> внизу страницы.
+      </p>
+    </section>
+
+    <!-- ===== Шаги: номера рисует CSS (counter + ::before) ===== -->
+    <section class="container section">
+      <ol class="steps">
+        <li>
+          <h3>Загрузка</h3>
+          <p>Снимки приходят из аппарата в формате <code>DICOM</code> — набор отдельных срезов. Их собирают в один трёхмерный объём <code>NIfTI</code>.</p>
+        </li>
+        <li>
+          <h3>Предобработка</h3>
+          <p>Последовательности совмещают между собой (регистрация), удаляют череп (<span lang="en">skull stripping</span>) и приводят яркость к единой шкале.</p>
+        </li>
+        <li>
+          <h3>Сегментация</h3>
+          <p>Трёхмерная нейросеть семейства <strong>U-Net</strong> проходит по объёму и для каждого вокселя решает: «очаг» или «фон».</p>
+        </li>
+        <li>
+          <h3>Постобработка</h3>
+          <p>Слишком мелкие «пятнышки» отбрасываются как шум, а оставшиеся области разделяются на отдельные очаги.</p>
+        </li>
+        <li>
+          <h3>Отчёт</h3>
+          <p>Для каждого очага — координаты и объём. Врач просматривает отметки и принимает окончательное решение: <em>модель подсказывает, но не ставит диагноз</em>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Словарик: якорь #glossary ===== -->
+    <section id="glossary" class="container section">
+      <h2>Словарик</h2>
+      <dl class="defs">
+        <dt>Воксель</dt>
+        <dd>«Трёхмерный пиксель» — минимальный кубик объёма, из которых состоит МРТ-снимок.</dd>
+
+        <dt>Сегментация</dt>
+        <dd>Разметка изображения: каждому вокселю присваивается класс (здесь — «очаг» или «фон»).</dd>
+
+        <dt>U-Net</dt>
+        <dd>Архитектура нейросети в форме буквы U: сначала сжимает изображение, выделяя признаки, затем восстанавливает его до исходного размера в виде маски.</dd>
+
+        <dt>Dice</dt>
+        <dd>Метрика совпадения маски модели <var>A</var> и разметки врача <var>B</var>: <code>2·|A ∩ B| / (|A| + |B|)</code>. Единица — полное совпадение, ноль — никакого.</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №2 по web-программированию</p>
+      <p><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

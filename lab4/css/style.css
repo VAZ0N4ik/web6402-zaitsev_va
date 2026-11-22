@@ -1,0 +1,648 @@
+/* ==========================================================================
+   NeuroScan — стили сайта (ЛР №2: основы HTML и CSS)
+   Порядок: переменные → база → шапка → блоки страниц → таблица → адаптив
+   ========================================================================== */
+
+
+/* ---------- 1. Переменные: вся палитра в одном месте ---------- */
+
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --text: #14202e;
+  --muted: #5a6b7d;
+  --accent: #0b7d7a;                       /* бирюзовый «как у сканера» */
+  --accent-soft: rgba(11, 125, 122, 0.12);
+  --on-accent: #ffffff;                    /* текст поверх акцентного фона */
+  --lesion: #d9480f;                       /* оранжевый — цвет «очага» */
+  --lesion-soft: rgba(217, 72, 15, 0.14);
+  --border: #d6dee8;
+  --shadow: 0 6px 20px rgba(20, 32, 46, 0.08);
+  --radius: 14px;
+  --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: Consolas, "Courier New", monospace;
+}
+
+/* Тёмная тема включается сама, если она выбрана в системе */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1320;
+    --surface: #121d2e;
+    --text: #e6edf5;
+    --muted: #9fb0c3;
+    --accent: #2ec4b6;
+    --accent-soft: rgba(46, 196, 182, 0.15);
+    --on-accent: #06231f;
+    --lesion: #ff8a4c;
+    --lesion-soft: rgba(255, 138, 76, 0.18);
+    --border: #22324a;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+/* ---------- 2. База: универсальный селектор и селекторы тегов ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.6em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Селектор атрибута + псевдоэлемент: стрелка у внешних ссылок */
+a[target="_blank"]::after {
+  content: " ↗";
+  font-size: 0.85em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lesion);
+  outline-offset: 2px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background-color: var(--accent-soft);
+}
+
+mark {
+  padding: 0 0.2em;
+  border-radius: 3px;
+  color: inherit;
+  background-color: var(--lesion-soft);
+}
+
+abbr[title] {
+  cursor: help;
+}
+
+
+/* ---------- 3. Раскладка ---------- */
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.tag {
+  margin-bottom: 0.4em;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.lead {
+  max-width: 40em;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.section-lead {
+  max-width: 44em;
+  color: var(--muted);
+}
+
+.highlight {
+  color: var(--lesion);
+}
+
+
+/* ---------- 4. Шапка и меню ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo-accent {
+  color: var(--accent);
+}
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Селектор потомка: все ссылки внутри меню */
+.main-nav a {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.main-nav a:hover {
+  color: var(--text);
+  background-color: var(--accent-soft);
+}
+
+/* Текущая страница */
+.main-nav a.active {
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+
+/* ---------- 5. Первый экран (селектор по id) ---------- */
+
+#hero {
+  padding: 56px 0;
+  background: linear-gradient(135deg, var(--accent-soft), transparent 60%);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--on-accent);
+  text-decoration: none;
+  background-color: var(--accent);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.btn-ghost {
+  color: var(--accent);
+  background-color: transparent;
+}
+
+/* Картинка среза с «бегущей» линией сканера */
+.scan {
+  justify-self: center;
+  max-width: 360px;
+  margin: 0;
+}
+
+.scan-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.scan-frame img {
+  display: block;
+}
+
+.scan-frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #7fe3d9, transparent);
+  box-shadow: 0 0 12px #7fe3d9;
+  animation: scan-line 4s ease-in-out infinite;
+}
+
+@keyframes scan-line {
+  0%   { top: 4%; }
+  50%  { top: 95%; }
+  100% { top: 4%; }
+}
+
+/* Если пользователь попросил систему не анимировать — не анимируем */
+@media (prefers-reduced-motion: reduce) {
+  .scan-frame::after {
+    display: none;
+  }
+}
+
+figcaption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+
+/* ---------- 6. Карточки, цитата, картинки ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.cards .card:hover {
+  transform: translateY(-4px);
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.quote {
+  margin: 0;
+  padding: 24px 28px;
+  border-left: 6px solid var(--lesion);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background-color: var(--surface);
+}
+
+.quote blockquote {
+  margin: 0;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.quote blockquote p {
+  margin: 0;
+}
+
+.quote figcaption {
+  text-align: left;
+}
+
+.wide-figure {
+  margin: 0;
+}
+
+.wide-figure img {
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+.meme {
+  max-width: 340px;
+  margin: 0;
+}
+
+.meme img {
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.meme figcaption {
+  text-align: left;
+}
+
+
+/* ---------- 7. Внутренние страницы ---------- */
+
+.page-head {
+  padding-top: 40px;
+}
+
+/* Дочерний селектор + счётчик: номера шагов рисует CSS */
+.steps {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps > li {
+  position: relative;
+  padding: 20px 20px 20px 84px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  counter-increment: step;
+}
+
+.steps > li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+/* Последний шаг (отчёт врачу) — цветом «очага» */
+.steps > li:last-child::before {
+  background-color: var(--lesion);
+}
+
+.steps h3 {
+  margin-bottom: 0.3em;
+}
+
+.steps p {
+  margin: 0;
+}
+
+/* Списки «термин — определение» */
+.defs {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px 24px;
+  margin: 0;
+}
+
+.defs dt {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.defs dd {
+  margin: 0;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.links {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.links li {
+  margin-bottom: 0.4em;
+}
+
+.links li::marker {
+  color: var(--lesion);
+}
+
+
+/* ---------- 8. Таблица ---------- */
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.data-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.data-table caption {
+  padding: 16px 18px 10px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.data-table thead th {
+  font-weight: 600;
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+/* «Зебра» и подсветка строки под курсором */
+.data-table tbody tr:nth-child(even) {
+  background-color: var(--accent-soft);
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--lesion-soft);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Выравнивание: 1-й и 3-й столбцы — по левому краю, 2-й — по центру, 4-й — по правому */
+.data-table th:nth-child(1),
+.data-table td:nth-child(1),
+.data-table th:nth-child(3),
+.data-table td:nth-child(3) {
+  text-align: left;
+}
+
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.data-table th:nth-child(4),
+.data-table td:nth-child(4) {
+  text-align: right;
+  font-family: var(--mono);
+}
+
+/* Строка с главной последовательностью */
+.data-table .key-row td:first-child {
+  font-weight: 700;
+  color: var(--lesion);
+}
+
+/* Квадратики-образцы яркости ликвора (строчные span с inline-block) */
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.swatch-dark {
+  background-color: #1d2228;
+}
+
+.swatch-bright {
+  background-color: #eef1f4;
+}
+
+.table-note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+
+/* ---------- 9. Подвал ---------- */
+
+.site-footer {
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+  background-color: var(--surface);
+}
+
+.site-footer p {
+  margin: 0 0 0.3em;
+}
+
+
+/* ---------- 10. Адаптив: узкие экраны (телефоны) ---------- */
+
+@media (max-width: 760px) {
+  .site-header {
+    position: static;
+  }
+
+  .header-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .main-nav a {
+    padding: 6px 10px;
+  }
+
+  #hero {
+    padding: 32px 0;
+  }
+
+  .hero-inner,
+  .profile,
+  .defs {
+    grid-template-columns: 1fr;
+  }
+
+  .defs dd {
+    margin-bottom: 8px;
+  }
+
+  .steps > li {
+    padding: 76px 20px 20px;
+  }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Об авторе сайта NeuroScan">
+  <title>NeuroScan — об авторе</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo-accent">Scan</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="mri.html">МРТ</a></li>
+          <li><a href="pipeline.html">Как это работает</a></li>
+          <li><a href="about.html" class="active" aria-current="page">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// кто это сделал</p>
+      <h1>Об авторе</h1>
+    </section>
+
+    <div class="container section profile">
+      <article class="card">
+        <h2>Личная информация</h2>
+        <dl class="defs">
+          <dt>Студент</dt>
+          <dd>Зайцев Виктор Андреевич</dd>
+
+          <dt>Группа</dt>
+          <dd>6402-010302D</dd>
+
+          <dt>Научный руководитель</dt>
+          <dd>Ильясова Наталья Юрьевна, д.т.н., доцент, профессор кафедры технической кибернетики</dd>
+
+          <dt>Тема диплома</dt>
+          <dd><em>(предполагаемая)</em> «Разработка технологии интеллектуального анализа изображений МРТ головного мозга для выявления и диагностики метастазов»</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <h2>Полезные ссылки</h2>
+        <ul class="links">
+          <li><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий лабораторных работ</a></li>
+          <li><a href="https://ssau.ru" target="_blank" rel="noopener">Самарский университет</a></li>
+          <li><a href="https://developer.mozilla.org/ru/docs/Web/HTML" target="_blank" rel="noopener">MDN: справочник по HTML</a></li>
+          <li><a href="https://developer.mozilla.org/ru/docs/Web/CSS" target="_blank" rel="noopener">MDN: справочник по CSS</a></li>
+          <li><a href="pipeline.html#glossary">Словарик терминов этого сайта</a></li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- ===== Мем из ЛР №1: картинка берётся из папки other/ по относительному пути ../ ===== -->
+    <section class="container section">
+      <h2>Регламент отдела контроля качества</h2>
+      <figure class="meme">
+        <img src="../other/memes/incident_qa.png" alt="Мем: Джейсон Стэтхем и список «Что говорить при инциденте»" width="853" height="1280">
+        <figcaption>Наследие лабораторной №1 — та же картинка, подключена по пути <code>../other/memes/incident_qa.png</code></figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №2 по web-программированию</p>
+      <p><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
