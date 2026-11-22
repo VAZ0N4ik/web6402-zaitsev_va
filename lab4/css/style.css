@@ -24,6 +24,7 @@
   --radius: 14px;
   --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: Consolas, "Courier New", monospace;
+  color-scheme: light dark;                /* поля формы и календарь тоже меняют тему */
 }
 
 /* Тёмная тема включается сама, если она выбрана в системе */
@@ -612,7 +613,88 @@ abbr[title] {
 }
 
 
-/* ---------- 9. Таблица ---------- */
+/* ---------- 9. Форма заявки ---------- */
+
+/* Поля идут столбиком, а в .form__row по два в ряд */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form__label {
+  font-weight: 600;
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.form__input:focus {
+  border-color: var(--accent);
+}
+
+/* Красная рамка, только когда пользователь уже что-то ввёл неправильно, а не сразу при загрузке */
+.form__input:user-invalid {
+  border-color: var(--lesion);
+}
+
+/* Группа переключателей: рамку fieldset убираем, варианты ставим в строку */
+.form__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.form__legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-weight: 600;
+}
+
+.form__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* Цвет галочек и кружков у checkbox и radio */
+.form__check {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.form__submit {
+  align-self: flex-start;
+}
+
+
+/* ---------- 10. Таблица ---------- */
 
 .data-table {
   overflow-x: auto;
@@ -707,7 +789,7 @@ abbr[title] {
 }
 
 
-/* ---------- 10. Подвал ---------- */
+/* ---------- 11. Подвал ---------- */
 
 .footer {
   margin-top: 40px;
@@ -723,7 +805,7 @@ abbr[title] {
 }
 
 
-/* ---------- 11. Адаптив: узкие экраны (телефоны) ---------- */
+/* ---------- 12. Адаптив: узкие экраны (телефоны) ---------- */
 
 @media (max-width: 760px) {
   .header {
@@ -757,7 +839,8 @@ abbr[title] {
   }
 
   .profile,
-  .defs {
+  .defs,
+  .form__row {
     grid-template-columns: 1fr;
   }
 

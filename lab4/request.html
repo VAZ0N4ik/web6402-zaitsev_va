@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Заявка на анализ МРТ-исследования">
+  <title>NeuroScan — заявка на анализ</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo__accent">Scan</span></span>
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Главная</a></li>
+          <li><a class="nav__link" href="mri.html">МРТ</a></li>
+          <li><a class="nav__link" href="pipeline.html">Как это работает</a></li>
+          <li><a class="nav__link nav__link_active" href="request.html" aria-current="page">Заявка</a></li>
+          <li><a class="nav__link" href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// отправить исследование</p>
+      <h1>Заявка на анализ</h1>
+      <p class="lead">
+        Заполните форму, и модель проверит исследование на метастазы.
+        Отчёт с найденными очагами придёт на указанную почту.
+      </p>
+    </section>
+
+    <!-- Форма: 6 типов полей — text, email, date, radio, checkbox, textarea -->
+    <div class="container section">
+      <form class="form card" id="request-form">
+        <div class="form__row">
+          <label class="form__field">
+            <span class="form__label">ФИО врача</span>
+            <input class="form__input" type="text" name="doctor" placeholder="Иванов И.И." required>
+          </label>
+          <label class="form__field">
+            <span class="form__label">E-mail для отчёта</span>
+            <input class="form__input" type="email" name="email" placeholder="doctor@clinic.ru" required>
+          </label>
+        </div>
+
+        <div class="form__row">
+          <label class="form__field">
+            <span class="form__label">Дата исследования</span>
+            <input class="form__input" type="date" name="exam-date" required>
+          </label>
+          <fieldset class="form__group">
+            <legend class="form__legend">Срочность</legend>
+            <label class="form__option"><input class="form__check" type="radio" name="priority" value="планово" checked> Планово</label>
+            <label class="form__option"><input class="form__check" type="radio" name="priority" value="срочно"> Срочно</label>
+          </fieldset>
+        </div>
+
+        <fieldset class="form__group">
+          <legend class="form__legend">Какие последовательности есть в архиве</legend>
+          <label class="form__option"><input class="form__check" type="checkbox" name="sequences" value="T1"> T1</label>
+          <label class="form__option"><input class="form__check" type="checkbox" name="sequences" value="T1-CE" checked> T1-CE</label>
+          <label class="form__option"><input class="form__check" type="checkbox" name="sequences" value="T2"> T2</label>
+          <label class="form__option"><input class="form__check" type="checkbox" name="sequences" value="FLAIR"> FLAIR</label>
+        </fieldset>
+
+        <label class="form__field">
+          <span class="form__label">Комментарий</span>
+          <textarea class="form__input" name="comment" rows="4" placeholder="Например: контроль после лечения"></textarea>
+        </label>
+
+        <label class="form__option">
+          <input class="form__check" type="checkbox" name="consent" required>
+          Согласен на обработку персональных данных
+        </label>
+
+        <button class="form__submit button" type="submit">Отправить на анализ</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
