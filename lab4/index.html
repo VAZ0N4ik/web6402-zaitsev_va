@@ -10,28 +10,28 @@
 </head>
 <body>
 
-  <!-- ===== Шапка: логотип + меню (одинаковая на всех страницах) ===== -->
-  <header class="site-header">
-    <div class="container header-inner">
+  <!-- Шапка: логотип и меню, одинаковая на всех страницах -->
+  <header class="header">
+    <div class="container header__inner">
       <a class="logo" href="index.html">
         <img src="img/logo.svg" alt="" width="36" height="36">
-        <span>Neuro<span class="logo-accent">Scan</span></span>
+        <span>Neuro<span class="logo__accent">Scan</span></span>
       </a>
-      <nav class="main-nav" aria-label="Главное меню">
-        <ul>
-          <li><a href="index.html" class="active" aria-current="page">Главная</a></li>
-          <li><a href="mri.html">МРТ</a></li>
-          <li><a href="pipeline.html">Как это работает</a></li>
-          <li><a href="about.html">Об авторе</a></li>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link nav__link_active" href="index.html" aria-current="page">Главная</a></li>
+          <li><a class="nav__link" href="mri.html">МРТ</a></li>
+          <li><a class="nav__link" href="pipeline.html">Как это работает</a></li>
+          <li><a class="nav__link" href="about.html">Об авторе</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- ===== Первый экран ===== -->
-    <section id="hero">
-      <div class="container hero-inner">
+    <!-- Первый экран -->
+    <section class="hero">
+      <div class="container hero__inner">
         <div>
           <p class="tag">// дипломный проект · 2026</p>
           <h1>Находим на&nbsp;МРТ то, что <span class="highlight">легко пропустить</span> уставшему глазу</h1>
@@ -39,60 +39,57 @@
             <strong>NeuroScan</strong> — учебный сайт о технологии интеллектуального анализа
             МРТ-снимков головного мозга: от сырых срезов до отчёта с найденными очагами.
           </p>
-          <p class="hero-actions">
-            <a class="btn" href="pipeline.html">Как это работает</a>
-            <a class="btn btn-ghost" href="mri.html">Что такое T1, T2, FLAIR</a>
+          <p class="hero__actions">
+            <a class="button" href="pipeline.html">Как это работает</a>
+            <a class="button button_ghost" href="mri.html">Что такое T1, T2, FLAIR</a>
           </p>
         </div>
 
         <figure class="scan">
-          <div class="scan-frame">
-            <img src="img/mri-slice.svg" alt="Схема аксиального среза головного мозга с выделенным очагом" width="360" height="360">
+          <div class="scan__frame">
+            <img class="scan__img" src="img/mri-slice.svg" alt="Схема аксиального среза головного мозга с выделенным очагом" width="360" height="360">
           </div>
-          <figcaption>Схема среза: <mark>оранжевым</mark> — очаг, найденный моделью</figcaption>
+          <figcaption class="scan__caption">Схема среза: <mark>оранжевым</mark> — очаг, найденный моделью</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ===== Зачем это нужно: три карточки ===== -->
+    <!-- Зачем это нужно: три карточки -->
     <section class="container section">
       <h2>Зачем это нужно</h2>
-      <p class="section-lead">
+      <p class="lead lead_small">
         Одно МРТ-исследование — это сотни срезов в нескольких режимах.
         Подробнее о режимах съёмки — на странице <a href="mri.html">«МРТ»</a>.
       </p>
       <div class="cards">
-        <article class="card">
+        <article class="card card_hover">
           <h3>Мелкие очаги</h3>
-          <p>Метастазы размером в несколько миллиметров легко потерять среди сотни срезов одного исследования.</p>
+          <p class="card__text">Метастазы размером в несколько миллиметров легко потерять среди сотни срезов одного исследования.</p>
         </article>
-        <article class="card">
+        <article class="card card_hover">
           <h3>Время врача</h3>
-          <p>Модель заранее отмечает подозрительные области, и радиолог <em>проверяет</em> их, а не ищет с нуля.</p>
+          <p class="card__text">Модель заранее отмечает подозрительные области, и радиолог <em>проверяет</em> их, а не ищет с нуля.</p>
         </article>
-        <article class="card">
+        <article class="card card_hover">
           <h3>Динамика</h3>
-          <p>Автоматический подсчёт числа и объёма очагов помогает сравнивать исследования до и после лечения.</p>
+          <p class="card__text">Автоматический подсчёт числа и объёма очагов помогает сравнивать исследования до и после лечения.</p>
         </article>
       </div>
     </section>
 
-    <!-- ===== Цитата из ЛР №1 ===== -->
+    <!-- Цитата из ЛР №1 -->
     <div class="container section">
       <figure class="quote">
-        <blockquote>
-          <p>На лабы не смотрят, их делают.</p>
-        </blockquote>
-        <figcaption>© Суханов С.В.</figcaption>
+        <blockquote class="quote__text">На лабы не смотрят, их делают.</blockquote>
+        <figcaption class="quote__author">© Суханов С.В.</figcaption>
       </figure>
     </div>
   </main>
 
-  <!-- ===== Подвал ===== -->
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №2 по web-программированию</p>
-      <p><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
     </div>
   </footer>
 

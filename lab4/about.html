@@ -10,18 +10,18 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="header">
+    <div class="container header__inner">
       <a class="logo" href="index.html">
         <img src="img/logo.svg" alt="" width="36" height="36">
-        <span>Neuro<span class="logo-accent">Scan</span></span>
+        <span>Neuro<span class="logo__accent">Scan</span></span>
       </a>
-      <nav class="main-nav" aria-label="Главное меню">
-        <ul>
-          <li><a href="index.html">Главная</a></li>
-          <li><a href="mri.html">МРТ</a></li>
-          <li><a href="pipeline.html">Как это работает</a></li>
-          <li><a href="about.html" class="active" aria-current="page">Об авторе</a></li>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Главная</a></li>
+          <li><a class="nav__link" href="mri.html">МРТ</a></li>
+          <li><a class="nav__link" href="pipeline.html">Как это работает</a></li>
+          <li><a class="nav__link nav__link_active" href="about.html" aria-current="page">Об авторе</a></li>
         </ul>
       </nav>
     </div>
@@ -37,46 +37,46 @@
       <article class="card">
         <h2>Личная информация</h2>
         <dl class="defs">
-          <dt>Студент</dt>
-          <dd>Зайцев Виктор Андреевич</dd>
+          <dt class="defs__term">Студент</dt>
+          <dd class="defs__desc">Зайцев Виктор Андреевич</dd>
 
-          <dt>Группа</dt>
-          <dd>6402-010302D</dd>
+          <dt class="defs__term">Группа</dt>
+          <dd class="defs__desc">6402-010302D</dd>
 
-          <dt>Научный руководитель</dt>
-          <dd>Ильясова Наталья Юрьевна, д.т.н., доцент, профессор кафедры технической кибернетики</dd>
+          <dt class="defs__term">Научный руководитель</dt>
+          <dd class="defs__desc">Ильясова Наталья Юрьевна, д.т.н., доцент, профессор кафедры технической кибернетики</dd>
 
-          <dt>Тема диплома</dt>
-          <dd><em>(предполагаемая)</em> «Разработка технологии интеллектуального анализа изображений МРТ головного мозга для выявления и диагностики метастазов»</dd>
+          <dt class="defs__term">Тема диплома</dt>
+          <dd class="defs__desc"><em>(предполагаемая)</em> «Разработка технологии интеллектуального анализа изображений МРТ головного мозга для выявления и диагностики метастазов»</dd>
         </dl>
       </article>
 
       <article class="card">
         <h2>Полезные ссылки</h2>
         <ul class="links">
-          <li><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий лабораторных работ</a></li>
-          <li><a href="https://ssau.ru" target="_blank" rel="noopener">Самарский университет</a></li>
-          <li><a href="https://developer.mozilla.org/ru/docs/Web/HTML" target="_blank" rel="noopener">MDN: справочник по HTML</a></li>
-          <li><a href="https://developer.mozilla.org/ru/docs/Web/CSS" target="_blank" rel="noopener">MDN: справочник по CSS</a></li>
-          <li><a href="pipeline.html#glossary">Словарик терминов этого сайта</a></li>
+          <li class="links__item"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий лабораторных работ</a></li>
+          <li class="links__item"><a href="https://ssau.ru" target="_blank" rel="noopener">Самарский университет</a></li>
+          <li class="links__item"><a href="https://developer.mozilla.org/ru/docs/Web/HTML" target="_blank" rel="noopener">MDN: справочник по HTML</a></li>
+          <li class="links__item"><a href="https://developer.mozilla.org/ru/docs/Web/CSS" target="_blank" rel="noopener">MDN: справочник по CSS</a></li>
+          <li class="links__item"><a href="pipeline.html#glossary">Словарик терминов этого сайта</a></li>
         </ul>
       </article>
     </div>
 
-    <!-- ===== Мем из ЛР №1: картинка берётся из папки other/ по относительному пути ../ ===== -->
+    <!-- Мем из ЛР №1: картинка лежит в папке other/, путь относительный через ../ -->
     <section class="container section">
       <h2>Регламент отдела контроля качества</h2>
-      <figure class="meme">
-        <img src="../other/memes/incident_qa.png" alt="Мем: Джейсон Стэтхем и список «Что говорить при инциденте»" width="853" height="1280">
-        <figcaption>Наследие лабораторной №1 — та же картинка, подключена по пути <code>../other/memes/incident_qa.png</code></figcaption>
+      <figure class="illustration illustration_meme">
+        <img class="illustration__img" src="../other/memes/incident_qa.png" alt="Мем: Джейсон Стэтхем и список «Что говорить при инциденте»" width="853" height="1280">
+        <figcaption class="illustration__caption">Наследие лабораторной №1 — та же картинка, подключена по пути <code>../other/memes/incident_qa.png</code></figcaption>
       </figure>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №2 по web-программированию</p>
-      <p><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
     </div>
   </footer>
 
