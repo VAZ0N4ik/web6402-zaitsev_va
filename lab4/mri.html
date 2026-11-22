@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Основные МРТ-последовательности и их роль в поиске метастазов">
+  <title>NeuroScan — МРТ-последовательности</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo__accent">Scan</span></span>
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Главная</a></li>
+          <li><a class="nav__link nav__link_active" href="mri.html" aria-current="page">МРТ</a></li>
+          <li><a class="nav__link" href="pipeline.html">Как это работает</a></li>
+          <li><a class="nav__link" href="request.html">Заявка</a></li>
+          <li><a class="nav__link" href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// входные данные</p>
+      <h1>МРТ-последовательности</h1>
+      <p class="lead">
+        МРТ не делает «одну фотографию»: аппарат снимает одну и ту же область в разных режимах —
+        <dfn>последовательностях</dfn>. Каждая подчёркивает свои ткани, поэтому модель получает на вход сразу несколько.
+      </p>
+    </section>
+
+    <!-- Один срез в четырёх режимах -->
+    <div class="container section">
+      <figure class="illustration">
+        <img class="illustration__img" src="img/sequences.svg" alt="Один и тот же схематичный срез в режимах T1, T1 с контрастом, T2 и FLAIR" width="760" height="230">
+        <figcaption class="illustration__caption">Один и тот же срез в четырёх режимах (схема). Очаг ярко «светится» только на T1 с контрастом.</figcaption>
+      </figure>
+    </div>
+
+    <!-- Таблица: 1-й столбец влево, 2-й по центру, 4-й вправо -->
+    <section class="container section">
+      <h2>Сравнение режимов</h2>
+      <div class="data-table">
+        <table class="data-table__table">
+          <caption class="data-table__caption">Основные последовательности и их роль в поиске метастазов</caption>
+          <thead>
+            <tr>
+              <th class="data-table__cell data-table__cell_head" scope="col">Последовательность</th>
+              <th class="data-table__cell data-table__cell_head" scope="col">Ликвор</th>
+              <th class="data-table__cell data-table__cell_head" scope="col">Что видно лучше всего</th>
+              <th class="data-table__cell data-table__cell_head" scope="col">Канал модели*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="data-table__row">
+              <td class="data-table__cell">T1</td>
+              <td class="data-table__cell"><span class="swatch swatch_dark"></span> тёмный</td>
+              <td class="data-table__cell">Анатомия: границы серого и белого вещества</td>
+              <td class="data-table__cell">0</td>
+            </tr>
+            <tr class="data-table__row data-table__row_key">
+              <td class="data-table__cell">T1 + контраст (T1-CE)</td>
+              <td class="data-table__cell"><span class="swatch swatch_dark"></span> тёмный</td>
+              <td class="data-table__cell">Очаги, накопившие контраст, — <strong>главный признак метастаза</strong></td>
+              <td class="data-table__cell">1</td>
+            </tr>
+            <tr class="data-table__row">
+              <td class="data-table__cell">T2</td>
+              <td class="data-table__cell"><span class="swatch swatch_bright"></span> яркий</td>
+              <td class="data-table__cell">Жидкость и отёк</td>
+              <td class="data-table__cell">2</td>
+            </tr>
+            <tr class="data-table__row">
+              <td class="data-table__cell">FLAIR</td>
+              <td class="data-table__cell"><span class="swatch swatch_dark"></span> подавлен</td>
+              <td class="data-table__cell">Отёк вокруг очага (перифокальный)</td>
+              <td class="data-table__cell">3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="data-table__note">* Номер канала — порядок, в котором последовательности подаются на вход нейросети в этом проекте.</p>
+    </section>
+
+    <section class="container section">
+      <h2>Почему именно контраст</h2>
+      <p>
+        Перед съёмкой T1-CE пациенту вводят контрастное вещество на основе гадолиния.
+        В здоровом мозге его не пускает <abbr title="гематоэнцефалический барьер">ГЭБ</abbr>,
+        а в метастазе барьер нарушен — вещество накапливается, и очаг становится <em>ярким</em>.
+        Поэтому T1-CE — главный канал для модели, а остальные режимы помогают отличить очаг от сосуда или артефакта.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

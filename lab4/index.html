@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NeuroScan — учебный сайт о поиске метастазов головного мозга на МРТ">
+  <title>NeuroScan — главная</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Шапка: логотип и меню, одинаковая на всех страницах -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo__accent">Scan</span></span>
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link nav__link_active" href="index.html" aria-current="page">Главная</a></li>
+          <li><a class="nav__link" href="mri.html">МРТ</a></li>
+          <li><a class="nav__link" href="pipeline.html">Как это работает</a></li>
+          <li><a class="nav__link" href="request.html">Заявка</a></li>
+          <li><a class="nav__link" href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Главная свёрстана на Grid: где какая область, задано в .home (style.css, раздел 5) -->
+  <main class="container home">
+    <section class="home__intro">
+      <p class="tag">// дипломный проект · 2026</p>
+      <h1>Находим на&nbsp;МРТ то, что <span class="highlight">легко пропустить</span> уставшему глазу</h1>
+      <p class="lead">
+        <strong>NeuroScan</strong> — учебный сайт о технологии интеллектуального анализа
+        МРТ-снимков головного мозга: от сырых срезов до отчёта с найденными очагами.
+      </p>
+      <p class="home__actions">
+        <a class="button" href="pipeline.html">Как это работает</a>
+        <a class="button button_ghost" href="mri.html">Что такое T1, T2, FLAIR</a>
+      </p>
+    </section>
+
+    <figure class="home__scan scan">
+      <div class="scan__frame">
+        <img class="scan__img" src="img/mri-slice.svg" alt="Схема аксиального среза головного мозга с выделенным очагом" width="360" height="360">
+        <span class="scan__ping"></span>
+      </div>
+      <figcaption class="scan__caption">Схема среза: <mark>оранжевым</mark> — очаг, найденный моделью</figcaption>
+    </figure>
+
+    <section class="home__why">
+      <h2>Зачем это нужно</h2>
+      <p class="lead lead_small">
+        Одно МРТ-исследование — это сотни срезов в нескольких режимах.
+        Подробнее о режимах съёмки — на странице <a href="mri.html">«МРТ»</a>.
+      </p>
+    </section>
+
+    <article class="home__card card">
+      <h3>Мелкие очаги</h3>
+      <p class="card__text">Метастазы размером в несколько миллиметров легко потерять среди сотни срезов одного исследования.</p>
+    </article>
+    <article class="home__card card">
+      <h3>Время врача</h3>
+      <p class="card__text">Модель заранее отмечает подозрительные области, и радиолог <em>проверяет</em> их, а не ищет с нуля.</p>
+    </article>
+    <article class="home__card card">
+      <h3>Динамика</h3>
+      <p class="card__text">Автоматический подсчёт числа и объёма очагов помогает сравнивать исследования до и после лечения.</p>
+    </article>
+
+    <!-- Цитата из ЛР №1 -->
+    <figure class="home__quote quote">
+      <blockquote class="quote__text">На лабы не смотрят, их делают.</blockquote>
+      <figcaption class="quote__author">© Суханов С.В.</figcaption>
+    </figure>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Этапы автоматического анализа МРТ: от загрузки снимков до отчёта">
+  <title>NeuroScan — как работает анализ</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="img/logo.svg" alt="" width="36" height="36">
+        <span>Neuro<span class="logo__accent">Scan</span></span>
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Главная</a></li>
+          <li><a class="nav__link" href="mri.html">МРТ</a></li>
+          <li><a class="nav__link nav__link_active" href="pipeline.html" aria-current="page">Как это работает</a></li>
+          <li><a class="nav__link" href="request.html">Заявка</a></li>
+          <li><a class="nav__link" href="about.html">Об авторе</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <p class="tag">// конвейер обработки</p>
+      <h1>Как работает анализ</h1>
+      <p class="lead">
+        Путь снимка от аппарата до врача — пять шагов. Незнакомые слова собраны
+        в <a href="#glossary">словарике</a> внизу страницы.
+      </p>
+    </section>
+
+    <!-- Страница свёрстана на Flexbox: шаги и словарик (style.css, раздел 7) -->
+    <section class="container section">
+      <ol class="steps">
+        <li class="steps__item">
+          <h3 class="steps__title">Загрузка</h3>
+          <p class="steps__text">Снимки приходят из аппарата в формате <code>DICOM</code> — набор отдельных срезов. Их собирают в один трёхмерный объём <code>NIfTI</code>.</p>
+          <p class="steps__result">→ NIfTI-объём</p>
+        </li>
+        <li class="steps__item">
+          <h3 class="steps__title">Предобработка</h3>
+          <p class="steps__text">Последовательности совмещают между собой (регистрация), удаляют череп (<span lang="en">skull stripping</span>) и приводят яркость к единой шкале.</p>
+          <p class="steps__result">→ 4 совмещённых канала</p>
+        </li>
+        <li class="steps__item">
+          <h3 class="steps__title">Сегментация</h3>
+          <p class="steps__text">Трёхмерная нейросеть семейства <strong>U-Net</strong> проходит по объёму и для каждого вокселя решает: «очаг» или «фон».</p>
+          <p class="steps__result">→ маска очагов</p>
+        </li>
+        <li class="steps__item">
+          <h3 class="steps__title">Постобработка</h3>
+          <p class="steps__text">Слишком мелкие «пятнышки» отбрасываются как шум, а оставшиеся области разделяются на отдельные очаги.</p>
+          <p class="steps__result">→ список очагов</p>
+        </li>
+        <li class="steps__item">
+          <h3 class="steps__title">Отчёт</h3>
+          <p class="steps__text">Для каждого очага — координаты и объём. Врач просматривает отметки и принимает окончательное решение: <em>модель подсказывает, но не ставит диагноз</em>.</p>
+          <p class="steps__result">→ отчёт для врача</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Словарик: на него ведёт якорь #glossary -->
+    <section id="glossary" class="container section">
+      <h2>Словарик</h2>
+      <dl class="glossary">
+        <div class="glossary__item">
+          <dt class="glossary__term">Воксель</dt>
+          <dd class="glossary__desc">«Трёхмерный пиксель» — минимальный кубик объёма, из которых состоит МРТ-снимок.</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">Сегментация</dt>
+          <dd class="glossary__desc">Разметка изображения: каждому вокселю присваивается класс (здесь — «очаг» или «фон»).</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">U-Net</dt>
+          <dd class="glossary__desc">Архитектура нейросети в форме буквы U: сначала сжимает изображение, выделяя признаки, затем восстанавливает его до исходного размера в виде маски.</dd>
+        </div>
+        <div class="glossary__item">
+          <dt class="glossary__term">Dice</dt>
+          <dd class="glossary__desc">Метрика совпадения маски модели <var>A</var> и разметки врача <var>B</var>: <code>2·|A ∩ B| / (|A| + |B|)</code>. Единица — полное совпадение, ноль — никакого.</dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">© 2026 Зайцев&nbsp;В.А., группа 6402-010302D · Лабораторная работа №4 по web-программированию</p>
+      <p class="footer__text"><a href="https://github.com/VAZ0N4ik/web6402-zaitsev_va" target="_blank" rel="noopener">Репозиторий на GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

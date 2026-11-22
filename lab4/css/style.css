@@ -1,0 +1,873 @@
+/* NeuroScan — стили сайта (ЛР №4). Классы названы по БЭМ: блок__элемент_модификатор */
+
+
+/* ---------- 1. Переменные: все цвета сайта задаются только здесь ---------- */
+
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --text: #14202e;
+  --muted: #5a6b7d;
+  --accent: #0b7d7a;                       /* бирюзовый «как у сканера» */
+  --accent-soft: rgba(11, 125, 122, 0.12);
+  --on-accent: #ffffff;                    /* текст поверх акцентного фона */
+  --lesion: #d9480f;                       /* оранжевый — цвет «очага» */
+  --lesion-soft: rgba(217, 72, 15, 0.14);
+  --border: #d6dee8;
+  --shadow: 0 6px 20px rgba(20, 32, 46, 0.08);
+  --scan-glow: #7fe3d9;                    /* линия сканера */
+  --scan-fade: rgba(127, 227, 217, 0);     /* тот же цвет, но полностью прозрачный */
+  --scan-trail: rgba(127, 227, 217, 0.3);  /* полупрозрачный «шлейф» за линией */
+  --scan-ping: #ff8a4c;                    /* кольца вокруг очага, как рамка на картинке */
+  --swatch-dark: #1d2228;                  /* образцы яркости ликвора в таблице */
+  --swatch-bright: #eef1f4;
+  --radius: 14px;
+  --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: Consolas, "Courier New", monospace;
+  color-scheme: light dark;                /* поля формы и календарь тоже меняют тему */
+}
+
+/* Тёмная тема включается сама, если она выбрана в системе */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1320;
+    --surface: #121d2e;
+    --text: #e6edf5;
+    --muted: #9fb0c3;
+    --accent: #2ec4b6;
+    --accent-soft: rgba(46, 196, 182, 0.15);
+    --on-accent: #06231f;
+    --lesion: #ff8a4c;
+    --lesion-soft: rgba(255, 138, 76, 0.18);
+    --border: #22324a;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+/* ---------- 2. База: только теги, без классов ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.6em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Стрелка у внешних ссылок */
+a[target="_blank"]::after {
+  content: " ↗";
+  font-size: 0.85em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lesion);
+  outline-offset: 2px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background-color: var(--accent-soft);
+}
+
+mark {
+  padding: 0 0.2em;
+  border-radius: 3px;
+  color: inherit;
+  background-color: var(--lesion-soft);
+}
+
+abbr[title] {
+  cursor: help;
+}
+
+
+/* ---------- 3. Общие блоки ---------- */
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.page-head {
+  padding-top: 40px;
+}
+
+.tag {
+  margin-bottom: 0.4em;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.lead {
+  max-width: 40em;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.lead_small {
+  max-width: 44em;
+  font-size: 1rem;
+}
+
+.highlight {
+  color: var(--lesion);
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--on-accent);
+  text-decoration: none;
+  background-color: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.button_ghost {
+  color: var(--accent);
+  background: none;
+}
+
+
+/* ---------- 4. Шапка, логотип, меню ---------- */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo__accent {
+  color: var(--accent);
+}
+
+.nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__link {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav__link:hover {
+  color: var(--text);
+  background-color: var(--accent-soft);
+}
+
+/* Текущая страница */
+.nav__link_active,
+.nav__link_active:hover {
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+
+/* ---------- 5. Главная: раскладка на Grid ---------- */
+
+/* Сетка из 3 колонок. Каждая область страницы получает имя через grid-area,
+   а grid-template-areas «рисует» из этих имён схему страницы.
+   Точка — ячейка без имени: туда браузер сам кладёт три карточки по порядку. */
+.home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "intro intro scan"
+    "why   why   scan"
+    ".     .     ."
+    "quote quote quote";
+  align-content: start;    /* main растянут на всю высоту окна, а ряды растягиваться не должны */
+  gap: 20px;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+.home__intro {
+  grid-area: intro;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface) 70%);
+}
+
+.home__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0 0;
+}
+
+.home__scan {
+  grid-area: scan;
+  align-self: center;
+  justify-self: center;
+}
+
+.home__why {
+  grid-area: why;
+  padding: 24px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+}
+
+.home__card:hover {
+  transform: translateY(-4px);
+}
+
+.home__quote {
+  grid-area: quote;
+}
+
+/* Срез МРТ со сканером */
+.scan {
+  max-width: 360px;
+  margin: 0;
+}
+
+.scan__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.scan__img {
+  display: block;
+}
+
+/* Анимация сканера: сверху вниз едет полоса со светящимся нижним краем.
+   Когда край доходит до очага (это 36% времени), от очага расходятся два кольца.
+   У полосы и колец одна длительность 4s, поэтому они всё время идут синхронно. */
+.scan__frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18%;
+  height: 18%;
+  border-bottom: 2px solid var(--scan-glow);
+  background: linear-gradient(to bottom, var(--scan-fade), var(--scan-trail));
+  box-shadow: 0 6px 14px var(--scan-glow);
+  animation: scan-sweep 4s linear infinite;
+}
+
+@keyframes scan-sweep {
+  from { top: -18%; }
+  to   { top: 100%; }
+}
+
+/* Точка в центре очага на картинке: 232 и 150 из 360 px — это 64.4% и 41.7% */
+.scan__ping {
+  position: absolute;
+  left: 64.4%;
+  top: 41.7%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+
+.scan__ping::before,
+.scan__ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--scan-ping);
+  border-radius: 50%;
+  opacity: 0;
+  animation: scan-ping 4s ease-out infinite;
+}
+
+/* Второе кольцо запаздывает, получается «волна» */
+.scan__ping::after {
+  animation-delay: 0.3s;
+}
+
+@keyframes scan-ping {
+  0%, 36%   { transform: scale(0.4); opacity: 0; }
+  40%       { opacity: 1; }
+  75%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Если пользователь попросил систему не анимировать — не анимируем */
+@media (prefers-reduced-motion: reduce) {
+  .scan__frame::after,
+  .scan__ping {
+    display: none;
+  }
+}
+
+.scan__caption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+
+/* ---------- 6. Карточки, цитата, картинки ---------- */
+
+.card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.card__text {
+  margin-bottom: 0;
+}
+
+.quote {
+  margin: 0;
+  padding: 24px 28px;
+  border-left: 6px solid var(--lesion);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background-color: var(--surface);
+}
+
+.quote__text {
+  margin: 0;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.quote__author {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.illustration {
+  margin: 0;
+}
+
+.illustration__img {
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+.illustration__caption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Мем: картинка поменьше, с тенью, подпись слева */
+.illustration_meme {
+  max-width: 340px;
+}
+
+.illustration_meme .illustration__img {
+  box-shadow: var(--shadow);
+}
+
+.illustration_meme .illustration__caption {
+  text-align: left;
+}
+
+
+/* ---------- 7. «Как это работает»: раскладка на Flexbox ---------- */
+
+/* Шаги стоят в ряд. flex: 1 1 180px — каждый шаг шириной от 180px,
+   лишнее место делится поровну, а если места мало, шаги переносятся на новую строку */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+/* Внутри шага тоже flex, только столбиком: номер, заголовок, текст, результат */
+.steps__item {
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  counter-increment: step;
+}
+
+/* Номер шага рисует CSS: счётчик + ::before */
+.steps__item::before {
+  content: counter(step, decimal-leading-zero);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+/* Последний шаг (отчёт врачу) — цветом «очага» */
+.steps__item:last-child::before {
+  background-color: var(--lesion);
+}
+
+.steps__title {
+  margin: 0;
+}
+
+.steps__text {
+  margin: 0;
+}
+
+/* margin-top: auto прижимает результат к низу шага, поэтому у всех шагов он на одной линии */
+.steps__result {
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* Словарик: каждая пара «термин — определение» это строка из двух flex-элементов */
+.glossary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.glossary__item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.glossary__item:last-child {
+  border-bottom: none;
+}
+
+.glossary__term {
+  flex: 0 0 140px;           /* термин всегда 140px: не растёт и не сжимается */
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.glossary__desc {
+  flex: 1;                   /* определение забирает всё оставшееся место */
+  margin: 0;
+}
+
+/* Списки «термин — определение» */
+.defs {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px 24px;
+  margin: 0;
+}
+
+.defs__term {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.defs__desc {
+  margin: 0;
+}
+
+
+/* ---------- 8. Об авторе ---------- */
+
+.profile {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.links {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.links__item {
+  margin-bottom: 0.4em;
+}
+
+.links__item::marker {
+  color: var(--lesion);
+}
+
+
+/* ---------- 9. Форма заявки ---------- */
+
+/* Поля идут столбиком, а в .form__row по два в ряд */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form__label {
+  font-weight: 600;
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.form__input:focus {
+  border-color: var(--accent);
+}
+
+/* Красная рамка, только когда пользователь уже что-то ввёл неправильно, а не сразу при загрузке */
+.form__input:user-invalid {
+  border-color: var(--lesion);
+}
+
+/* Группа переключателей: рамку fieldset убираем, варианты ставим в строку */
+.form__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.form__legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-weight: 600;
+}
+
+.form__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* Цвет галочек и кружков у checkbox и radio */
+.form__check {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.form__submit {
+  align-self: flex-start;
+}
+
+/* Сообщение после отправки, пока оно пустое — не показываем */
+.form__status {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.form__status:empty {
+  display: none;
+}
+
+
+/* ---------- 10. Таблица ---------- */
+
+.data-table {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.data-table__table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.data-table__caption {
+  padding: 16px 18px 10px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.data-table__cell {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.data-table__cell_head {
+  font-weight: 600;
+  color: var(--on-accent);
+  background-color: var(--accent);
+}
+
+/* «Зебра» и подсветка строки под курсором */
+.data-table__row:nth-child(even) {
+  background-color: var(--accent-soft);
+}
+
+.data-table__row:hover {
+  background-color: var(--lesion-soft);
+}
+
+.data-table__row:last-child .data-table__cell {
+  border-bottom: none;
+}
+
+/* Выравнивание: 1-й и 3-й столбцы — по левому краю, 2-й — по центру, 4-й — по правому */
+.data-table__cell:nth-child(1),
+.data-table__cell:nth-child(3) {
+  text-align: left;
+}
+
+.data-table__cell:nth-child(2) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.data-table__cell:nth-child(4) {
+  text-align: right;
+  font-family: var(--mono);
+}
+
+/* Строка с главной последовательностью */
+.data-table__row_key .data-table__cell:first-child {
+  font-weight: 700;
+  color: var(--lesion);
+}
+
+.data-table__note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Квадратики-образцы яркости ликвора */
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.swatch_dark {
+  background-color: var(--swatch-dark);
+}
+
+.swatch_bright {
+  background-color: var(--swatch-bright);
+}
+
+
+/* ---------- 11. Подвал ---------- */
+
+.footer {
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+  background-color: var(--surface);
+}
+
+.footer__text {
+  margin: 0 0 0.3em;
+}
+
+
+/* ---------- 12. Адаптив: узкие экраны (телефоны) ---------- */
+
+@media (max-width: 760px) {
+  .header {
+    position: static;
+  }
+
+  .header__inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .nav__link {
+    padding: 6px 10px;
+  }
+
+  /* На телефоне та же разметка, но области встают в одну колонку */
+  .home {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "scan"
+      "why"
+      "."
+      "."
+      "."
+      "quote";
+  }
+
+  .home__intro {
+    padding: 24px;
+  }
+
+  .profile,
+  .defs,
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .defs__desc {
+    margin-bottom: 8px;
+  }
+
+  /* Шагам медиазапрос не нужен: при ширине меньше двух шагов flex-wrap сам ставит их в столбик */
+
+  /* В столбик: термин над определением. flex: none — иначе 140px стали бы высотой */
+  .glossary__item {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .glossary__term {
+    flex: none;
+  }
+}
