@@ -28,62 +28,54 @@
     </div>
   </header>
 
-  <main>
-    <!-- Первый экран -->
-    <section class="hero">
-      <div class="container hero__inner">
-        <div>
-          <p class="tag">// дипломный проект · 2026</p>
-          <h1>Находим на&nbsp;МРТ то, что <span class="highlight">легко пропустить</span> уставшему глазу</h1>
-          <p class="lead">
-            <strong>NeuroScan</strong> — учебный сайт о технологии интеллектуального анализа
-            МРТ-снимков головного мозга: от сырых срезов до отчёта с найденными очагами.
-          </p>
-          <p class="hero__actions">
-            <a class="button" href="pipeline.html">Как это работает</a>
-            <a class="button button_ghost" href="mri.html">Что такое T1, T2, FLAIR</a>
-          </p>
-        </div>
-
-        <figure class="scan">
-          <div class="scan__frame">
-            <img class="scan__img" src="img/mri-slice.svg" alt="Схема аксиального среза головного мозга с выделенным очагом" width="360" height="360">
-          </div>
-          <figcaption class="scan__caption">Схема среза: <mark>оранжевым</mark> — очаг, найденный моделью</figcaption>
-        </figure>
-      </div>
+  <!-- Главная свёрстана на Grid: где какая область, задано в .home (style.css, раздел 5) -->
+  <main class="container home">
+    <section class="home__intro">
+      <p class="tag">// дипломный проект · 2026</p>
+      <h1>Находим на&nbsp;МРТ то, что <span class="highlight">легко пропустить</span> уставшему глазу</h1>
+      <p class="lead">
+        <strong>NeuroScan</strong> — учебный сайт о технологии интеллектуального анализа
+        МРТ-снимков головного мозга: от сырых срезов до отчёта с найденными очагами.
+      </p>
+      <p class="home__actions">
+        <a class="button" href="pipeline.html">Как это работает</a>
+        <a class="button button_ghost" href="mri.html">Что такое T1, T2, FLAIR</a>
+      </p>
     </section>
 
-    <!-- Зачем это нужно: три карточки -->
-    <section class="container section">
+    <figure class="home__scan scan">
+      <div class="scan__frame">
+        <img class="scan__img" src="img/mri-slice.svg" alt="Схема аксиального среза головного мозга с выделенным очагом" width="360" height="360">
+      </div>
+      <figcaption class="scan__caption">Схема среза: <mark>оранжевым</mark> — очаг, найденный моделью</figcaption>
+    </figure>
+
+    <section class="home__why">
       <h2>Зачем это нужно</h2>
       <p class="lead lead_small">
         Одно МРТ-исследование — это сотни срезов в нескольких режимах.
         Подробнее о режимах съёмки — на странице <a href="mri.html">«МРТ»</a>.
       </p>
-      <div class="cards">
-        <article class="card card_hover">
-          <h3>Мелкие очаги</h3>
-          <p class="card__text">Метастазы размером в несколько миллиметров легко потерять среди сотни срезов одного исследования.</p>
-        </article>
-        <article class="card card_hover">
-          <h3>Время врача</h3>
-          <p class="card__text">Модель заранее отмечает подозрительные области, и радиолог <em>проверяет</em> их, а не ищет с нуля.</p>
-        </article>
-        <article class="card card_hover">
-          <h3>Динамика</h3>
-          <p class="card__text">Автоматический подсчёт числа и объёма очагов помогает сравнивать исследования до и после лечения.</p>
-        </article>
-      </div>
     </section>
 
+    <article class="home__card card">
+      <h3>Мелкие очаги</h3>
+      <p class="card__text">Метастазы размером в несколько миллиметров легко потерять среди сотни срезов одного исследования.</p>
+    </article>
+    <article class="home__card card">
+      <h3>Время врача</h3>
+      <p class="card__text">Модель заранее отмечает подозрительные области, и радиолог <em>проверяет</em> их, а не ищет с нуля.</p>
+    </article>
+    <article class="home__card card">
+      <h3>Динамика</h3>
+      <p class="card__text">Автоматический подсчёт числа и объёма очагов помогает сравнивать исследования до и после лечения.</p>
+    </article>
+
     <!-- Цитата из ЛР №1 -->
-    <div class="container section">
-      <figure class="quote">
-        <blockquote class="quote__text">На лабы не смотрят, их делают.</blockquote>
-        <figcaption class="quote__author">© Суханов С.В.</figcaption>
-      </figure>
-    </div>
+    <figure class="home__quote quote">
+      <blockquote class="quote__text">На лабы не смотрят, их делают.</blockquote>
+      <figcaption class="quote__author">© Суханов С.В.</figcaption>
+    </figure>
   </main>
 
   <footer class="footer">

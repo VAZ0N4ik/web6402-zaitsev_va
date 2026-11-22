@@ -264,31 +264,64 @@ abbr[title] {
 }
 
 
-/* ---------- 5. Главная: первый экран ---------- */
+/* ---------- 5. Главная: раскладка на Grid ---------- */
 
-.hero {
-  padding: 56px 0;
-  background: linear-gradient(135deg, var(--accent-soft), var(--bg) 60%);
-  border-bottom: 1px solid var(--border);
-}
-
-.hero__inner {
+/* Сетка из 3 колонок. Каждая область страницы получает имя через grid-area,
+   а grid-template-areas «рисует» из этих имён схему страницы.
+   Точка — ячейка без имени: туда браузер сам кладёт три карточки по порядку. */
+.home {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "intro intro scan"
+    "why   why   scan"
+    ".     .     ."
+    "quote quote quote";
+  align-content: start;    /* main растянут на всю высоту окна, а ряды растягиваться не должны */
+  gap: 20px;
+  padding-top: 32px;
+  padding-bottom: 24px;
 }
 
-.hero__actions {
+.home__intro {
+  grid-area: intro;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface) 70%);
+}
+
+.home__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin: 24px 0 0;
+}
+
+.home__scan {
+  grid-area: scan;
+  align-self: center;
+  justify-self: center;
+}
+
+.home__why {
+  grid-area: why;
+  padding: 24px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+}
+
+.home__card:hover {
+  transform: translateY(-4px);
+}
+
+.home__quote {
+  grid-area: quote;
 }
 
 /* Картинка среза с «бегущей» линией сканера */
 .scan {
-  justify-self: center;
   max-width: 360px;
   margin: 0;
 }
@@ -339,12 +372,6 @@ abbr[title] {
 
 /* ---------- 6. Карточки, цитата, картинки ---------- */
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-}
-
 .card {
   padding: 24px;
   border: 1px solid var(--border);
@@ -353,10 +380,6 @@ abbr[title] {
   background-color: var(--surface);
   box-shadow: var(--shadow);
   transition: transform 0.2s;
-}
-
-.card_hover:hover {
-  transform: translateY(-4px);
 }
 
 .card__text {
@@ -632,11 +655,23 @@ abbr[title] {
     padding: 6px 10px;
   }
 
-  .hero {
-    padding: 32px 0;
+  /* На телефоне та же разметка, но области встают в одну колонку */
+  .home {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "scan"
+      "why"
+      "."
+      "."
+      "."
+      "quote";
   }
 
-  .hero__inner,
+  .home__intro {
+    padding: 24px;
+  }
+
   .profile,
   .defs {
     grid-template-columns: 1fr;
