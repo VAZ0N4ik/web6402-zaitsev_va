@@ -693,6 +693,17 @@ abbr[title] {
   align-self: flex-start;
 }
 
+/* Сообщение после отправки, пока оно пустое — не показываем */
+.form__status {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.form__status:empty {
+  display: none;
+}
+
 
 /* ---------- 10. Таблица ---------- */
 
